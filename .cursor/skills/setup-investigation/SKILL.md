@@ -1,6 +1,6 @@
 ---
 name: setup-investigation
-description: Fill investigation-specific placeholders in product.mdc, models.mdc, and global-rules.mdc for this REA workspace. Use when the user runs /setup-investigation or /setup-rules on a fresh copy of cursor-rules-rea or REA-TEMPLATE.
+description: Fill investigation-specific placeholders in product.mdc, models.mdc, and global-rules.mdc. Use when the user runs /setup-investigation or /setup-rules on a fresh copy of cursor-rules-rea.
 disable-model-invocation: true
 ---
 
@@ -65,4 +65,4 @@ Never modify target binaries or reconstruction app code during setup. You only w
 ## Finish
 
 - Confirm no `[bracketed placeholders]` remain in the files you edited.
-- Tell the user: this rules package does not install REA. For a new project they should run `npx rea-agents@latest setup --client cursor`, then restart Cursor — that is how they get current REA. Re-run the same command later to refresh. Then run `/start-investigation` (or say "Use REA to inspect …") in a new Agent chat.
+- Tell the user they can start inspecting with `/start-investigation` (or "Use REA to inspect …"). If REA is not connected, offer to run `npx rea-agents@latest setup --client cursor` and ask them to restart Cursor. This repo is the only template.

@@ -5,11 +5,13 @@ description: Start a lawful REA investigation. Ask for the target and authorizat
 
 # Start Investigation
 
-Run this when the user wants to inspect a chosen app, game, binary, or site with official REA.
+The user may not be a coder. Speak in plain language. This folder is cursor-rules-rea — do not send them to REA-TEMPLATE or a second repo.
+
+Run this when they want to inspect a chosen app, game, binary, or site with official REA.
 
 ## 1. Identify the target
 
-If they did not name a target and path, ask **one** question: what should we inspect, and where is it?
+If they did not name a target and path, ask **one** question: what should we inspect, and where is it (an installed app, or a file they can point to)?
 
 Do not pick an example app for them. Paths in old notes or fixtures are not the target.
 
@@ -28,12 +30,7 @@ Update the "Current investigation" block in `.cursor/rules/product.mdc` to match
 ## 4. Use official REA
 
 - If REA MCP tools are available, use them. Follow `.cursor/rules/rea.mdc` and the installed `reverse-engineer-anything` skill if present.
-- If tools are missing, say so. Suggest restarting Cursor, then `npx rea-agents@latest setup --client cursor` from a trusted directory outside the target. For a JS/Electron tree you may fall back to:
-
-```bash
-npx -y rea-agents@latest analyze-javascript-application /absolute/path/to/app --json
-```
-
+- If tools are missing, say so in one short paragraph. Offer to run `npx rea-agents@latest setup --client cursor` for them (trusted directory, not inside the target). Then ask them to restart Cursor. That command is how this machine gets current REA; they can run it again later to refresh.
 - Start with the advertised tool that matches the target. Summary-first. Cite Evidence IDs in `EVIDENCE.md`.
 - Do not repeat an identical call. Do not install cracked native engines.
 

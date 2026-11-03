@@ -8,7 +8,7 @@ alwaysApply: true
 ## Project layout
 
 ```
-REA-TEMPLATE/
+<project>/
 ├── .cursor/
 │   ├── rules/                 # Always-on REA investigation rules
 │   ├── skills/                # /setup-investigation, /start-investigation, update-docs

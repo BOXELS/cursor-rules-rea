@@ -1,29 +1,32 @@
 # cursor-rules-rea
 
-Cursor rules for [REA](https://github.com/morluto/rea) investigation workspaces. Clone this into any app you are authorized to inspect so the agent already knows the workflow, lawful-use boundary, evidence ledger, and official REA setup.
+A starter template for [Cursor's](https://cursor.com) `.cursor/` folder, meant to use official [REA](https://github.com/morluto/rea) (Reverse Engineer Anything). Same idea as [BOXELS/cursor-rules](https://github.com/BOXELS/cursor-rules): copy it into a project, and the AI already knows the workflow. This one is for inspecting software you own (or are allowed to examine), not for building a product from scratch.
 
-This is the REA-specific sibling of [BOXELS/cursor-rules](https://github.com/BOXELS/cursor-rules).
+You do not need a second repo. **This is the only template.**
 
 ## What is this?
 
-When you open a new investigation in Cursor, the AI does not know you are using REA, where notes go, or what is off limits. These files fix that.
+When you open Cursor to inspect an app or game, the AI does not know you are using REA, where notes go, or what is off limits. These files fix that.
 
-Copy them into a project, delete `template-repo.mdc`, run `/setup-investigation`, and register REA:
+You do not have to fill them in yourself. Open the folder in Cursor and type `/setup-investigation` (or `/start-investigation` if you already know what to inspect).
 
-```bash
-npx rea-agents@latest setup --client cursor
+- **New folder** — create an empty project, drop this template in, tell the AI what you want to inspect.
+- **Existing project** — drop the files into the repo you already have. Setup does not edit your app code; it only fills the rule files.
+
+REA itself is not inside this repo. The first time you inspect something, the agent (or you) runs official setup so this computer gets current REA. Restart Cursor when asked. Run the same setup later if you want a newer REA.
+
+## Start (non-coders)
+
+1. On GitHub, open [BOXELS/cursor-rules-rea](https://github.com/BOXELS/cursor-rules-rea) and click **Use this template**. Name the new repo after what you want to inspect.
+2. In Cursor, clone that new repo (welcome screen **Clone repo**, or **File → Open Folder**).
+3. In chat, type `/start-investigation` and say what you want to inspect.
+
+The agent asks whether you are allowed to examine it, then does the rest.
+
+Or say:
+
 ```
-
-Restart Cursor, then:
-
-```
-/start-investigation
-```
-
-or:
-
-```
-Use REA to inspect [your app or game] and explain how [feature] works. Show the evidence.
+Use REA to inspect [my app or game] and explain how [feature] works. Show the evidence.
 ```
 
 ## What's included
@@ -31,74 +34,69 @@ Use REA to inspect [your app or game] and explain how [feature] works. Show the 
 ```
 .cursor/
 ├── rules/
-│   ├── rea.mdc              # Official REA workflow, routing, evidence, hard stops
-│   ├── global-rules.mdc     # Ask vs act, scope, communication
-│   ├── product.mdc          # This workspace + current investigation (fill in)
-│   ├── tech.mdc             # Node / rea-agents / git
-│   ├── security.mdc         # Lawful use, secrets, captures
-│   ├── design.mdc           # Reconstruction UI only
-│   ├── structure.mdc        # investigations/, targets/, evidence/
-│   ├── documentation.mdc    # What must stay current
-│   ├── models.mdc           # Everyday vs hard models
-│   └── template-repo.mdc    # THIS REPO ONLY — do not copy
+│   ├── rea.mdc                 # Official REA workflow, evidence, hard stops
+│   ├── global-rules.mdc        # Ask vs act, how to talk to you
+│   ├── product.mdc             # This investigation (filled by /setup-investigation)
+│   ├── tech.mdc                # Node / REA / git
+│   ├── security.mdc            # Lawful use, secrets, captures
+│   ├── design.mdc              # Only if we build a reconstruction UI
+│   ├── structure.mdc           # Where notes and reconstructions go
+│   ├── documentation.mdc       # What must stay current
+│   ├── models.mdc              # Everyday vs hard models
+│   └── template-repo.mdc       # THIS REPO ONLY — do not copy
 ├── agents/
-│   └── worker.md            # Cheap executor for mechanical steps
+│   └── worker.md               # Cheap helper for mechanical edits
 └── skills/
-    ├── setup-investigation/ # /setup-investigation — fill target + model prefs
-    ├── start-investigation/ # /start-investigation — authorize, ledger, REA
-    └── update-docs/         # "update docs" after a finding
-AGENTS.md                    # Pointer for Claude Code / Codex / Copilot
+    ├── setup-investigation/    # /setup-investigation — fill the placeholders
+    ├── start-investigation/    # /start-investigation — authorize and inspect
+    └── update-docs/            # "update docs" after a finding
+AGENTS.md
+docs/                           # Start here + authorization
+investigations/_template/       # Note files the agent copies for each target
 ```
 
-## Quick start
+> **Why `.mdc`?** Cursor only loads `.mdc` files in `.cursor/rules/`. Keep that extension.
 
-### 1. Copy into your project
+**Rules vs skills:** a *rule* is always on; a *skill* is a procedure you trigger (`/start-investigation`).
 
-```bash
-git clone --depth 1 https://github.com/BOXELS/cursor-rules-rea.git /tmp/cursor-rules-rea
-cp -R /tmp/cursor-rules-rea/.cursor /tmp/cursor-rules-rea/AGENTS.md .
-rm -f .cursor/rules/template-repo.mdc
-rm -rf /tmp/cursor-rules-rea
-```
+`template-repo.mdc` belongs only in this GitHub repo. If you copy the whole folder, delete that file (or `/setup-investigation` will ask).
 
-If you copied the whole folder, delete `template-repo.mdc` from the destination.
+## Copy into an existing project
 
-### 2. Get current REA
+Copy into the project root:
 
-This repo is Cursor rules only. It does not vendor or auto-update [morluto/rea](https://github.com/morluto/rea). Cloning it does **not** install REA.
+- everything in `.cursor/rules/` except `template-repo.mdc`
+- `.cursor/skills/`
+- `.cursor/agents/worker.md`
+- `AGENTS.md`
+- `docs/` and `investigations/_template/` if you want the note folders too
 
-For a new project: copy cursor-rules-rea, then run `npx rea-agents@latest setup --client cursor`, then restart Cursor. That is how you get current REA. Re-run the same command later to refresh.
+## Get current REA
 
-From a trusted directory, not inside the target app:
+This template does not ship REA. After you copy it (or when the agent says REA is not connected):
 
 ```bash
 npx rea-agents@latest setup --client cursor
 ```
 
-Review the plan, approve, restart Cursor. Get REA only from [morluto/rea](https://github.com/morluto/rea), [rea.tools](https://rea.tools/), or `rea-agents` on npm.
+Restart Cursor. That is how you get current REA. Re-run the same command later to refresh. Get REA only from [morluto/rea](https://github.com/morluto/rea), [rea.tools](https://rea.tools/), or `rea-agents` on npm.
 
-Need Node 22.x (>=22.23.4), 24.x (>=24.22.1), or 26.12.1+. Odd lines (23, 25) are unsupported. Setup pins the resolved `rea-agents` version in Cursor's MCP config; `@latest` is only used when you run setup again.
-
-### 3. Specialize and start
-
-```
-/setup-investigation
-```
-
-```
-/start-investigation
-```
+Need Node 22.x (>=22.23.4), 24.x (>=24.22.1), or 26.12.1+. Odd versions (23, 25) are unsupported.
 
 ## Lawful use
 
-These rules follow [REA's disclaimer](https://github.com/morluto/rea/blob/main/DISCLAIMER.md). They are for software you own or are authorized to examine.
+[REA's disclaimer](https://github.com/morluto/rea/blob/main/DISCLAIMER.md): software you own or are authorized to examine. This template will not help with DRM, license bypass, anti-cheat, game cheats, unauthorized access, or writing exploits.
 
-They will not help with DRM circumvention, anti-cheat, game cheats, unauthorized access, copying protected code, or writing exploits.
+See [docs/AUTHORIZATION.md](docs/AUTHORIZATION.md).
 
-## Full investigation starter
+## Maintaining this repository
 
-This package is the cloneable `.cursor/` rules. The companion workspace is [BOXELS/REA-TEMPLATE](https://github.com/BOXELS/REA-TEMPLATE) — same rules plus `investigations/`, `targets/`, and `evidence/` folders.
+This GitHub repo publishes the template. `template-repo.mdc` is always-on here so agents do not treat *this* folder as an investigation.
+
+- Leave shipped rules as the template. Edit them only to change what copiers get.
+- Do not run `/start-investigation` against a real target in this repo.
+- After a change that affects how copies are used, update this README in the same change.
 
 ## License
 
-MIT — use it however you want. REA remains under its own license. Commercial decompilers need your own license.
+MIT. REA has its own license. Commercial decompilers need your own license.

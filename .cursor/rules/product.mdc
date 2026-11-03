@@ -1,5 +1,5 @@
 ---
-description: Investigation context — what this workspace is for, who uses it, and the current target. Applies to every interaction.
+description: Investigation context — what this is, who it's for, and the current target. Applies to every interaction.
 alwaysApply: true
 ---
 
@@ -7,38 +7,32 @@ alwaysApply: true
 
 ## What this is
 
-REA-TEMPLATE is a reusable investigation workspace for official [REA](https://github.com/morluto/rea) (Reverse Engineer Anything). Clone [BOXELS/cursor-rules-rea](https://github.com/BOXELS/cursor-rules-rea) into any new investigation so Cursor already knows the workflow.
-
-This folder is the starter: pick an authorized target, inspect it with REA, keep an evidence ledger, and optionally reconstruct a similar feature in `reconstructions/`.
+This folder uses [cursor-rules-rea](https://github.com/BOXELS/cursor-rules-rea) — the Cursor rules template for official [REA](https://github.com/morluto/rea). Same idea as cursor-rules: copy it in, and the AI already knows the workflow. There is no second template.
 
 ## Who uses this
 
-Primary user: an operator who chooses what to inspect and already has (or will state) authorization. They compare this to "open the app in Hopper/Ghidra and take notes," but the agent drives REA and writes the ledger.
+Primary user: someone who can name software they are allowed to inspect and say what they want to understand. They may not be a coder. Do not ask them to use another GitHub repo.
 
 ## Key user flows
 
-1. Authorize → name the target and path → start investigation notes → inspect with REA → write findings
-2. Follow one feature through evidence → explain it in plain language → optionally reconstruct it for our own project
-3. Update REA / refresh Cursor registration → resume from saved evidence, do not repeat identical analysis
+1. Copy or "Use this template" → open in Cursor → `/start-investigation` → authorize → inspect → findings
+2. Follow one feature through evidence → explain it → optionally reconstruct it
+3. If REA is missing, run official setup once, restart Cursor, continue
 
-Every new task should connect to one of these flows. If it doesn't, question whether it belongs in this workspace.
+Every new task should connect to one of these flows.
 
 ## Current investigation
 
-- Target name: [fill with /setup-investigation — e.g. "Notes app search", "our game binary"]
+- Target name: [fill with /setup-investigation]
 - Authorization: [own / written permission / N/A — not started]
-- Artifact path: [absolute path under `targets/` or installed app path]
+- Artifact path: [absolute path or installed app]
 - Primary question: [what we want to understand]
 - Out of scope: DRM, anti-cheat, license bypass, unauthorized services, exploit development
 
-## Roadmap
-
-Next up: (1) name an authorized target, (2) run `/start-investigation`, (3) keep Evidence IDs in the ledger, (4) reconstruct only what we are allowed to rebuild.
-
 ## Tone of voice
 
-Technical, precise, calm. "Search resolves through module X; Evidence `abc` shows the import" not "it probably uses some search API." Error messages should help: "REA MCP is not connected — restart Cursor, then retry" not "something failed."
+Plain language first. Do not dump git or npx unless a missing tool needs one command.
 
 ## Legal and compliance
 
-REA is for lawful research, interoperability, preservation, and analysis of software you own or are authorized to examine. See `docs/AUTHORIZATION.md` and [REA's disclaimer](https://github.com/morluto/rea/blob/main/DISCLAIMER.md). Do not proceed without a stated authorization basis.
+See `docs/AUTHORIZATION.md` and [REA's disclaimer](https://github.com/morluto/rea/blob/main/DISCLAIMER.md). Do not proceed without a stated authorization basis.

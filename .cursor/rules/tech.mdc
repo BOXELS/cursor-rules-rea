@@ -44,6 +44,6 @@ alwaysApply: true
 
 ## Updates
 
-- This rules package does not vendor REA. Cloning cursor-rules-rea does not install or refresh the MCP server.
-- For a new project: copy cursor-rules-rea, then run `npx rea-agents@latest setup --client cursor`, then restart Cursor. That is how you get current REA. Re-run the same command later to refresh.
+- This template does not vendor REA. Copying cursor-rules-rea does not install or refresh the MCP server.
+- After you copy it: run `npx rea-agents@latest setup --client cursor`, then restart Cursor. That is how you get current REA. Re-run the same command later to refresh.
 - `rea update` also refreshes a global CLI. Restart Cursor after any setup or update. Setup pins the resolved `rea-agents` version in the client config; it does not stay on the floating `@latest` tag until you run setup again.
