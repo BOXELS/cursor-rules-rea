@@ -12,7 +12,7 @@ If `.cursor/rules/template-repo.mdc` exists, read it first — you are in the cu
 - `.cursor/rules/structure.mdc` — where investigation files go
 - `.cursor/rules/documentation.mdc` — doc location and what to keep current
 - `.cursor/rules/design.mdc` — UI standards (only when touching reconstructions)
-- `.cursor/rules/models.mdc` — Cursor model guidance; safe to skip outside Cursor
+- `.cursor/rules/models.mdc` — Cursor model guidance, including model routing
 
 Workflows:
 
@@ -21,5 +21,7 @@ Workflows:
 - `.cursor/skills/update-docs/SKILL.md` — persist findings into notes and rules
 
 Subagent: `.cursor/agents/worker.md` — low-cost executor for fully specified steps (Cursor only).
+
+Model routing: see "Route work to the right model" in `.cursor/rules/models.mdc`. Claude Code uses `.claude/agents/Explore.md` (Haiku) and `.claude/agents/worker.md` (Sonnet).
 
 Don't duplicate rule content here. This file is intentionally a pointer.

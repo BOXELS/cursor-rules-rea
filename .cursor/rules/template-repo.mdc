@@ -7,7 +7,7 @@ alwaysApply: true
 
 This repo **publishes** cursor-rules-rea. It is the REA counterpart to BOXELS/cursor-rules. It is not an investigation and there is no companion REA-TEMPLATE product.
 
-Copiers take the rules (not this file), the skills, `worker.md`, `AGENTS.md`, and optionally `docs/` plus `investigations/_template/`.
+Copiers take the rules (not this file), the skills, `worker.md`, `.claude/agents/`, `AGENTS.md`, and optionally `docs/` plus `investigations/_template/`.
 
 ## Do not
 

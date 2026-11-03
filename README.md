@@ -68,6 +68,7 @@ Copy into the project root:
 - everything in `.cursor/rules/` except `template-repo.mdc`
 - `.cursor/skills/`
 - `.cursor/agents/worker.md`
+- `.claude/agents/` (Claude Code subagents)
 - `AGENTS.md`
 - `docs/` and `investigations/_template/` if you want the note folders too
 

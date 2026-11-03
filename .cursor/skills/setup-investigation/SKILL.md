@@ -53,7 +53,7 @@ Never modify target binaries or reconstruction app code during setup. You only w
 ### 2. `models.mdc`
 
 - Cursor plan (Hobby / Pro / Pro+ / Ultra / Teams). Cost vs quality. Privacy Mode.
-- Recommend one everyday model and one hard-task model. Default everyday: Grok 4.7. Default hard: Opus 5 thinking.
+- Recommend one everyday model and one hard-task model. Default everyday: Grok 4.7. Default hard: Opus 5.5 thinking.
 - If they have a cheap high-allowance model, set worker `model:` to that ID. If not, set `inherit` and say delegation is off.
 - Keep the two tier tables and plan-then-delegate section.
 

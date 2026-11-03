@@ -11,7 +11,7 @@ These rules apply no matter which model is currently running. Notice when the ta
 
 - Cursor plan: [fill with /setup-investigation]
 - Default model for everyday work: Grok 4.7 or Auto
-- Model for hard work: Claude Opus 5 (thinking) or Claude Fable 5.1 (high thinking)
+- Model for hard work: Claude Opus 5.5 (thinking) or Claude Fable 5.1 (high thinking)
 - Worker model for delegated steps: `grok-4.7[fast=true,effort=high]` in `.cursor/agents/worker.md`
 - Cost sensitivity: Keep costs low — only suggest a premium model for genuinely hard investigation or reconstruction
 - Privacy constraints: [fill if Privacy Mode / Anthropic retention affects Fable]
@@ -27,7 +27,8 @@ Use for: filling note templates, renaming files, summarizing already-returned Ev
 | **Auto** | Fine default for beginners. |
 | **Composer 2.5** | Cheap, fast edits and terminal work. |
 | **Grok 4.7** | Strong instruction-following with many rules loaded. |
-| **Claude Sonnet 5** | Best everyday Claude-style reasoning. |
+| **Claude Sonnet 5.5** | Best everyday Claude-style reasoning. |
+| **Claude Haiku 5.5** | The cheapest Claude model. Use it for searching notes, summarizing logs and docs, and simple bulk edits. |
 | **Gemini 3.8 Flash** | Cheap, 1M context for reading large ledgers. |
 | **GPT-5.6 Terra / Luna** | Mid/low GPT-5.6. Terra is OK for everyday agent work. |
 
@@ -37,8 +38,8 @@ Use for: first pass on an unknown binary or app, multi-subsystem investigations,
 
 | Model | Notes |
 |---|---|
-| **Claude Opus 5** | Workhorse hard-tier. Use *thinking*. |
-| **Claude Fable 5.1** | Top Claude line; needs Anthropic retention opt-in under Privacy Mode / Teams. |
+| **Claude Opus 5.5** | Workhorse hard-tier. Use *thinking*. |
+| **Claude Fable 5.1** | Top Claude line, 2.5x Opus 5.5's price. Use it for problems Opus 5.5 could not solve. Needs Anthropic retention opt-in under Privacy Mode / Teams. It has extra cybersecurity safeguards, so if it blocks lawful investigation work, go back to Opus 5.5. |
 | **GPT-5.6 Sol** | Persistent long sessions. Sometimes waits for a second "do it" — the go-ahead rule in `global-rules.mdc` covers that. |
 | **Kimi K3** | 1M context, hidden by default. |
 
@@ -55,6 +56,19 @@ Use for: first pass on an unknown binary or app, multi-subsystem investigations,
 3. Never block on model choice. Never upsell everyday work.
 4. After two failed fixes on an everyday model, recommend escalating.
 5. When the hard part is done, say they can switch back.
+
+## Route work to the right model
+
+| Work | In Cursor | In Claude Code |
+|---|---|---|
+| Searching code, summarizing logs and docs | Built-in Explore, set to Claude Haiku 5.5 in Cursor Settings | `Explore` on Haiku 5.5 (`.claude/agents/Explore.md`) |
+| Mechanical steps, building from a clear plan, tests, routine fixes | `worker` on Grok 4.7 (`.cursor/agents/worker.md`) | `worker` on Sonnet 5.5 (`.claude/agents/worker.md`) |
+| Planning, architecture, tricky bugs, combining results | Claude Opus 5.5, in the main chat | Claude Opus 5.5, in the main chat |
+| Problems Opus 5.5 could not solve | Claude Fable 5.1 | Claude Fable 5.1, as a one-off subagent model |
+
+- Cursor bills Claude models at API rates and Grok from its included pool, so Cursor's `worker` stays on Grok.
+- Cursor also reads `.claude/agents/`. Both tools have a `worker` file on purpose: when names match, Cursor uses the `.cursor/agents/` version.
+- Quick edits and back-and-forth stay in the main chat. A subagent starts with no chat history, so handing off small jobs can cost more than it saves.
 
 ## Plan on the hard tier, execute on the cheap tier
 
