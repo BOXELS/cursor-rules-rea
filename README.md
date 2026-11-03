@@ -93,7 +93,7 @@ They will not help with DRM circumvention, anti-cheat, game cheats, unauthorized
 
 ## Full investigation starter
 
-This package is the cloneable `.cursor/` rules. The companion local workspace `REA-TEMPLATE` already includes these files plus `investigations/`, `targets/`, and `evidence/` folders.
+This package is the cloneable `.cursor/` rules. The companion workspace is [BOXELS/REA-TEMPLATE](https://github.com/BOXELS/REA-TEMPLATE) — same rules plus `investigations/`, `targets/`, and `evidence/` folders.
 
 ## License
 
