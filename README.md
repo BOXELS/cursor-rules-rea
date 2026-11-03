@@ -93,7 +93,7 @@ They will not help with DRM circumvention, anti-cheat, game cheats, unauthorized
 
 ## Full investigation starter
 
-If you want the folder layout (`investigations/`, `targets/`, `evidence/`) already created, use the [REA-TEMPLATE](https://github.com/BOXELS/REA-TEMPLATE) workspace that already includes this package.
+This package is the cloneable `.cursor/` rules. The companion local workspace `REA-TEMPLATE` already includes these files plus `investigations/`, `targets/`, and `evidence/` folders.
 
 ## License
 
