@@ -65,4 +65,4 @@ Never modify target binaries or reconstruction app code during setup. You only w
 ## Finish
 
 - Confirm no `[bracketed placeholders]` remain in the files you edited.
-- Tell the user: run `/start-investigation` (or say "Use REA to inspect …") in a new Agent chat; restart Cursor if they just ran `npx rea-agents@latest setup`.
+- Tell the user: this rules package does not install REA. For a new project they should run `npx rea-agents@latest setup --client cursor`, then restart Cursor — that is how they get current REA. Re-run the same command later to refresh. Then run `/start-investigation` (or say "Use REA to inspect …") in a new Agent chat.

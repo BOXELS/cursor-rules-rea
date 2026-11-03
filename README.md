@@ -63,7 +63,11 @@ rm -rf /tmp/cursor-rules-rea
 
 If you copied the whole folder, delete `template-repo.mdc` from the destination.
 
-### 2. Register official REA
+### 2. Get current REA
+
+This repo is Cursor rules only. It does not vendor or auto-update [morluto/rea](https://github.com/morluto/rea). Cloning it does **not** install REA.
+
+For a new project: copy cursor-rules-rea, then run `npx rea-agents@latest setup --client cursor`, then restart Cursor. That is how you get current REA. Re-run the same command later to refresh.
 
 From a trusted directory, not inside the target app:
 
@@ -73,7 +77,7 @@ npx rea-agents@latest setup --client cursor
 
 Review the plan, approve, restart Cursor. Get REA only from [morluto/rea](https://github.com/morluto/rea), [rea.tools](https://rea.tools/), or `rea-agents` on npm.
 
-Need Node 22.x (>=22.23.4), 24.x (>=24.22.1), or 26.12.1+. Odd lines (23, 25) are unsupported.
+Need Node 22.x (>=22.23.4), 24.x (>=24.22.1), or 26.12.1+. Odd lines (23, 25) are unsupported. Setup pins the resolved `rea-agents` version in Cursor's MCP config; `@latest` is only used when you run setup again.
 
 ### 3. Specialize and start
 

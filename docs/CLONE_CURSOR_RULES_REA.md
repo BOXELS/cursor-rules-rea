@@ -17,13 +17,11 @@ Then in Cursor:
 /setup-investigation
 ```
 
-And register REA if this machine has not already:
+Copying the rules does not install REA. For a new project: copy cursor-rules-rea, then run `npx rea-agents@latest setup --client cursor`, then restart Cursor. That is how you get current REA. Re-run the same command later to refresh.
 
 ```bash
 npx rea-agents@latest setup --client cursor
 ```
-
-Restart Cursor after setup.
 
 ## What not to copy
 
