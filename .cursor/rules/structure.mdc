@@ -1,0 +1,53 @@
+---
+description: Investigation folder layout and file placement. Applies to all file creation.
+alwaysApply: true
+---
+
+# Structure Rules
+
+## Project layout
+
+```
+REA-TEMPLATE/
+├── .cursor/
+│   ├── rules/                 # Always-on REA investigation rules
+│   ├── skills/                # /setup-investigation, /start-investigation, update-docs
+│   └── agents/worker.md       # Cheap executor for mechanical steps
+├── AGENTS.md                  # Pointer for non-Cursor agents
+├── docs/                      # How to start, authorization, clone instructions
+├── investigations/            # One folder per target
+│   └── <slug>/
+│       ├── TARGET.md          # What, where, authorization
+│       ├── QUESTIONS.md       # Checklist of questions and evidence needed
+│       ├── EVIDENCE.md        # Evidence IDs, limitations, unknowns
+│       ├── FINDINGS.md        # Plain-language answers
+│       └── NOTES.md           # Working notes
+├── targets/                   # Authorized artifacts (gitignored binaries)
+├── evidence/                  # Exported REA bundles + raw captures
+│   └── raw/                   # HAR, pcap, dumps — gitignored
+├── reconstructions/           # Our own implementations of understood features
+└── notes/                     # Scratch, not a formal investigation
+```
+
+## File placement rules
+
+- New investigations go in `investigations/<slug>/` using the files in `investigations/_template/`.
+- Authorized binaries and app trees go in `targets/` (or stay at an existing absolute install path). Do not commit them.
+- Exported REA bundles go in `evidence/`. Raw captures go in `evidence/raw/`.
+- Companion code we write goes in `reconstructions/<feature>/`.
+- Agent/reference docs go in `docs/` — see `documentation.mdc`.
+- Cursor rules live in `.cursor/rules/` as `.mdc` files. Never create a rule with a `.md` extension.
+- Cursor skills live in `.cursor/skills/<skill-name>/SKILL.md`.
+- `AGENTS.md` is a thin pointer. Don't duplicate rule content into it.
+
+## Naming conventions
+
+- Investigation slugs: kebab-case (`notes-search`, `dx-ball-pan`).
+- Notes: `TARGET.md`, `QUESTIONS.md`, `EVIDENCE.md`, `FINDINGS.md`, `NOTES.md`.
+- Reconstructions: kebab-case directories, stack-native file names inside.
+
+## When creating new files
+
+1. Check whether an existing investigation folder already covers this target.
+2. Never create a file outside this layout without asking first.
+3. If a new top-level directory is needed, propose it and explain why.

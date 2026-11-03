@@ -1,0 +1,54 @@
+---
+description: Visual standards for reconstructions and investigation notes we publish as UI. Loads only for UI files.
+globs: **/*.tsx, **/*.jsx, **/*.vue, **/*.svelte, **/*.astro, **/*.html, **/*.css, **/*.scss, **/reconstructions/**
+alwaysApply: false
+---
+
+# Design Rules
+
+These apply when we build a reconstruction UI or any page a user sees. Investigation markdown does not need this file.
+
+## Component library
+
+- Prefer a small, existing stack the user names. Default for new reconstructions: semantic HTML + Tailwind-style utility classes, or the stack already in `reconstructions/`.
+- Icons: Lucide (or the set already in the reconstruction). 20px default, 1.5px stroke.
+- Animations: CSS transitions only, max 300ms. No animation on first paint.
+- Dropdowns and dialogs must be keyboard-accessible. Never use `alert()` or `window.confirm()`.
+
+## States
+
+Every interactive control needs loading, empty, error, hover, focus, active, and disabled. No happy-path-only UI.
+
+- Loading: spinner or skeleton. Never a blank screen.
+- Empty: one sentence plus a next action.
+- Error: what happened and what to try.
+- Buttons: disable while the action runs. No double-submit.
+
+## Specifications
+
+- Spacing on a 4px grid: 8, 12, 16, 24, 32, 48.
+- Body text must stay readable next to monospace Evidence IDs and paths.
+- Responsive: 640 / 768 / 1024. Don't break tables on small screens.
+
+## Patterns
+
+- Forms: inline validation on blur. Disable submit while processing.
+- Modals: X + click outside + Escape.
+- Images: width/height set, descriptive alt text.
+
+### Searchable dropdown keyboard navigation
+
+| Key | Action |
+|---|---|
+| **↓ / ↑** | Move highlight (`preventDefault`) |
+| **Enter** | Select highlighted row |
+| **Escape** | Close, clear search, reset highlight |
+
+Highlight starts at **-1**. Reset on query change. Scroll highlighted row into view.
+
+## Accessibility
+
+- Keyboard-navigable controls, logical tab order.
+- Contrast at least 4.5:1 for body text.
+- Respect `prefers-reduced-motion`.
+- Form fields have labels. Placeholder is not a label.

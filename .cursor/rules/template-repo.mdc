@@ -1,0 +1,25 @@
+---
+description: This repository publishes cursor-rules-rea. It is not an investigation. Never fill shipped placeholders or run /setup-investigation here unless the user is converting a clone into a real investigation.
+alwaysApply: true
+---
+
+# Template repository
+
+This repo **publishes** the REA Cursor rules package. It is not an investigation workspace.
+
+The shipped product is the `.cursor/rules/*.mdc` files (except this one), the three skills, `worker.md`, and `AGENTS.md`. Investigation-specific `[brackets]` in `product.mdc` and `models.mdc` are intentional. **Do not copy this file** into downstream projects.
+
+## Do not
+
+- Do not replace placeholders except when authoring the template.
+- Do not run `/setup-investigation` or `/start-investigation` here. If the user types them anyway, ask whether they are maintaining the template or converting a clone — wait for that answer.
+- Do not add a specific target, binaries, or reconstruction app unless the user explicitly wants a demo.
+- Do not treat `product.mdc`'s current-investigation brackets as *this* repo's target.
+
+## Do
+
+- Copiers take the rules (not this file), the three skills, the `worker` subagent, and `AGENTS.md`.
+- Keep REA lawful-use rules in `rea.mdc` and `security.mdc` intact.
+- When a change affects how copies are used, update `README.md` in the same change.
+
+The other always-on rules still load. **This file wins on identity.**

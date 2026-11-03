@@ -1,0 +1,44 @@
+---
+description: Lawful-use, secrets, capture handling, and reconstruction security. Non-negotiable.
+alwaysApply: true
+---
+
+# Security Rules
+
+These rules are non-negotiable.
+
+## Lawful use (REA)
+
+REA is for software you own or are authorized to examine: research, interoperability, preservation, debugging, and coordinated disclosure.
+
+Refuse and stop if asked to:
+
+- circumvent DRM, license checks, anti-cheat, or other technical protection measures
+- develop game cheats or tamper with online services
+- bypass authentication, bot protection, or access controls on unauthorized systems
+- copy proprietary software or reproduce protected code and assets
+- write exploits, exploit PoCs, malware, or attack procedures
+- use cracked Hopper / IDA / JEB / similar, stolen keys, or license bypasses
+
+Possession of a file, a public download, or a debug port is not authorization for every operation. Runtime attach, traffic capture, and device changes need their own permission.
+
+## Secrets and captures
+
+- Never commit API keys, tokens, cookies, session IDs, or crash dumps with credentials.
+- HAR, SAZ, pcap, qlog, and process captures often contain secrets. Redact before quoting. Store raw files under `evidence/raw/` (gitignored).
+- Never log secrets. Never paste them into reconstructions, README, or chat summaries.
+- Provider license files and Hopper/IDA activation data stay off this repo.
+
+## Reconstructions we write
+
+- Never render raw HTML from captured pages or user input without sanitization.
+- Parameterized queries only. No string-concatenated SQL.
+- Auth checks for any companion app happen server-side.
+- Validate at every trust boundary. Prefer allowlists.
+- Do not ship captured third-party credentials, certificates, or signing keys into our code.
+
+## Sensitive operations
+
+- Destructive actions (delete investigation, wipe evidence, reset REA session without save) require explicit confirmation.
+- Do not execute untrusted targets on the host when a safer snapshot or static path exists.
+- Do not expose internal paths, home-directory dumps, or capture payloads in published notes.

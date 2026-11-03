@@ -1,0 +1,29 @@
+---
+description: Where investigation docs live, how they're named, and what must stay current.
+alwaysApply: true
+---
+
+# Documentation Rules
+
+## Always keep docs current
+
+- After any investigation milestone, reconstruction, or convention change: update the matching notes and `.cursor/rules`. Do not leave stale or contradictory documentation.
+- Prefer editing existing files over creating duplicates. Search `docs/` and `investigations/` before writing a new file.
+- What to document: target identity, authorization basis, Evidence IDs, limitations, unknowns, and things agents must NOT do.
+
+## Doc location and naming
+
+- Workspace how-to docs live in `docs/` as `SCREAMING_SNAKE.md` (`START_HERE.md`, `AUTHORIZATION.md`).
+- Per-target notes live in `investigations/<slug>/` with the fixed names in `structure.mdc`.
+- A new investigation must include: one-sentence purpose, artifact path, authorization, questions, and an evidence ledger.
+
+## Cursor rules maintenance
+
+- If a change affects patterns other agents need, update `.cursor/rules/` as well as prose docs.
+- Cross-cutting concerns → `global-rules.mdc`. REA workflow → `rea.mdc`. Domain-specific → the matching rule file.
+- New rule files must use the `.mdc` extension.
+- Model names in `models.mdc` go stale every few months. Refresh against [cursor.com/docs/models](https://cursor.com/docs/models).
+
+## Trigger: "update docs"
+
+When the user says "update documentation", "update docs", "update the docs", or similar, run the **`update-docs` skill**. Don't ask which files to update — the skill finds them.

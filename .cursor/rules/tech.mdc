@@ -1,0 +1,47 @@
+---
+description: REA stack, Node/runtime requirements, CLI conventions, and git rules for investigation workspaces.
+alwaysApply: true
+---
+
+# Tech Rules
+
+## Runtime
+
+- Node.js 22.x (>=22.23.4), 24.x (>=24.22.1), or 26.12.1+. Odd lines (23, 25) are unsupported by `rea-agents`. This template pins `.nvmrc` to `26`.
+- Official package: `rea-agents` from npm. Setup: `npx rea-agents@latest setup --client cursor`.
+- Prefer a global `rea` CLI (`npm install --global rea-agents`) for repeated terminal use. One-off: `npx -y rea-agents@latest <command>` from a trusted directory outside the target.
+- Native engines (Hopper, Ghidra, IDA, Kuna) are optional and use existing licensed installs. Do not install cracked tools. Do not install unrelated software to "fix" MCP registration.
+
+## Investigation conventions
+
+- File naming: kebab-case for notes and reconstructions; keep Evidence IDs verbatim in ledgers.
+- Group by investigation, not by file type. Each investigation lives under `investigations/<slug>/`.
+- Functions in reconstructions should do one thing. Prefer TypeScript strict mode when we write companion code, unless the user names another stack.
+- Never install new packages without asking. Explain why and what the alternative is.
+
+## Secrets and artifacts
+
+- Environment variables for REA provider paths (`REA_GHIDRA_*`, `REA_HOPPER_*`, `REA_KUNA_COMMAND`, `REA_TSHARK_COMMAND`, etc.) stay on the machine — never commit them.
+- Absolute target paths only. Do not copy bulky binaries into git.
+- Validation: treat REA Evidence as the source of truth for artifact identity (SHA-256, path, provider). Do not invent hashes.
+
+## Git
+
+- Commits: descriptive present-tense messages. One logical change per commit. Never commit secrets, `.env`, captures, or target binaries.
+- **Canonical branch:** `main`.
+- Feature work for reconstructions uses branches off `main`.
+
+### Scoped commits (parallel agent / multi-chat work)
+
+1. Check `git status` before committing.
+2. Stage **only** the files you changed for this task — `git add path/to/file`, never `git add .` or `git add -A` unless the user explicitly wants everything committed.
+3. Leave unrelated modified/untracked files alone.
+4. Never commit secrets, `.env`, credential files, or raw captures.
+
+## Testing reconstructions
+
+- When the user asks to build a similar feature, write tests for the behavior we *observed* and for our own design choices. Do not claim bit-identical proprietary output unless the user owns the original and asks for a comparison.
+
+## Updates
+
+- CLI: `rea update` (or `npx rea-agents@latest setup` to refresh Cursor registration and the bundled skill). Restart Cursor after setup.

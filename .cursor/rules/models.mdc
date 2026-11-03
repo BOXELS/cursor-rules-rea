@@ -1,0 +1,71 @@
+---
+description: Model selection for REA investigations — everyday vs hard, and when to switch.
+alwaysApply: true
+---
+
+# Model Rules
+
+These rules apply no matter which model is currently running. Notice when the task is a poor fit for the current model and say so — briefly, once — then get on with the work.
+
+## This project's setup
+
+- Cursor plan: [fill with /setup-investigation]
+- Default model for everyday work: Grok 4.7 or Auto
+- Model for hard work: Claude Opus 5 (thinking) or Claude Fable 5.1 (high thinking)
+- Worker model for delegated steps: `grok-4.7[fast=true,effort=high]` in `.cursor/agents/worker.md`
+- Cost sensitivity: Keep costs low — only suggest a premium model for genuinely hard investigation or reconstruction
+- Privacy constraints: [fill if Privacy Mode / Anthropic retention affects Fable]
+
+## Two tiers
+
+### Everyday tier — fast, cheap
+
+Use for: filling note templates, renaming files, summarizing already-returned Evidence, small reconstruction edits, "what does this note say?", single-file work with a clear spec.
+
+| Model | Notes |
+|---|---|
+| **Auto** | Fine default for beginners. |
+| **Composer 2.5** | Cheap, fast edits and terminal work. |
+| **Grok 4.7** | Strong instruction-following with many rules loaded. |
+| **Claude Sonnet 5** | Best everyday Claude-style reasoning. |
+| **Gemini 3.8 Flash** | Cheap, 1M context for reading large ledgers. |
+| **GPT-5.6 Terra / Luna** | Mid/low GPT-5.6. Terra is OK for everyday agent work. |
+
+### Hard tier — use deliberately
+
+Use for: first pass on an unknown binary or app, multi-subsystem investigations, native decompile + reconstruction, a bug that already survived two attempts, anything touching auth/payments/security in *our* reconstructions, long autonomous sessions.
+
+| Model | Notes |
+|---|---|
+| **Claude Opus 5** | Workhorse hard-tier. Use *thinking*. |
+| **Claude Fable 5.1** | Top Claude line; needs Anthropic retention opt-in under Privacy Mode / Teams. |
+| **GPT-5.6 Sol** | Persistent long sessions. Sometimes waits for a second "do it" — the go-ahead rule in `global-rules.mdc` covers that. |
+| **Kimi K3** | 1M context, hidden by default. |
+
+### Naming gotchas
+
+- There is no "ChatGPT 6" in Cursor. Newest OpenAI family is **GPT-5.6** (Sol > Terra > Luna).
+- "Thinking" is extra reasoning time, not a different model. Use it on the hard tier.
+- Model names churn. Verify against the picker and [cursor.com/docs/models](https://cursor.com/docs/models). This list is current as of November 2026.
+
+## How to apply this
+
+1. Classify the task as everyday or hard. If unclear, ask one question.
+2. If the current model is a mismatch, say so in one line, then proceed.
+3. Never block on model choice. Never upsell everyday work.
+4. After two failed fixes on an everyday model, recommend escalating.
+5. When the hard part is done, say they can switch back.
+
+## Plan on the hard tier, execute on the cheap tier
+
+When you are on a hard-tier model and the work breaks into steps: plan and review here; hand mechanical typing to `worker`.
+
+1. Write a numbered plan. Mark each step **delegate** or **keep**.
+2. **Delegate:** fill note templates from already-gathered Evidence, rename/move files, write tests for described reconstruction behavior, run a named command.
+3. **Keep:** target routing, REA tool choice, authorization calls, interpreting decompilation, architecture of reconstructions, anything the worker already failed twice.
+4. Handoff must include Goal, Files, Change, Don't touch, Done when. Never write "as discussed."
+5. Review the worker's diff before telling the user it is done.
+
+### Project-specific hard signals
+
+Treat as hard-tier: first investigation of an unknown target, native decompile, multi-feature traces, reconstruction that must match observed behavior, and any request that approaches `security.mdc` boundaries (refuse those — do not delegate them).

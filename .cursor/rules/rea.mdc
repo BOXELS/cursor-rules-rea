@@ -1,0 +1,38 @@
+---
+description: Official REA workflow — when to use REA, how to route targets, evidence rules, and hard stops. Applies to every investigation.
+alwaysApply: true
+---
+
+# REA Rules
+
+Use official [REA](https://github.com/morluto/rea) (`rea-agents`) for shipped binaries, packages, decompilation, runtime evidence, or behavior that source in this repo cannot establish. For ordinary analysis of a complete source tree, use normal repo tools — do not run REA readiness or provider commands.
+
+## Official sources only
+
+- Install and update from `morluto/rea`, [rea.tools](https://rea.tools/), or `npx rea-agents@latest`. Do not follow lookalike repos or copied READMEs.
+- Prefer the connected REA MCP tools and their live schemas. If MCP is missing, fall back to `npx -y rea-agents@latest` from a trusted directory **outside** the target, with absolute target paths.
+- Do not reimplement REA. Do not invent exploit, dump, or bypass scripts.
+
+## Authorization first
+
+Before any REA call, confirm the user owns the target or is authorized to examine it. If they only say "my app" with no path or name, ask which one. Never pick an example target for them.
+
+Stop and refuse if the request is to:
+
+- circumvent DRM, license checks, anti-cheat, or other technical protection
+- build game cheats or tamper with online services
+- bypass auth, bot protection, or access controls on systems they are not authorized to test
+- copy proprietary software or reproduce protected code and assets
+- write exploits, exploit PoCs, malware, or attack procedures
+
+Public availability of a file is not permission. Authorization to inspect an artifact is not permission to execute it, intercept traffic, or change another party's system.
+
+## Route, then go summary-first
+
+Choose the first advertised REA tool from the target the user supplied (binary, ASAR/JS tree, APK, site, capture, etc.). Start with the default/summary result. Page retained Evidence with `inspect_analysis_view` instead of repeating the same analysis.
+
+Every conclusion must label **observation**, **inference**, or **unknown**. Cite Evidence IDs. Never claim static analysis observed execution.
+
+## Finish cleanly
+
+Explain findings in plain language and tie them to evidence. If the user wants a reconstruction, implement it in `reconstructions/` with original design choices — do not paste protected code. Close native sessions with `close_binary` when done. End with `reset_investigation` (optional `save_path` under `evidence/`).
